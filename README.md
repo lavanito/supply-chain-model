@@ -10,9 +10,8 @@ The model, tests and paper source behind
 Lavan Mahadeva · ORCID [0009-0007-8976-6617](https://orcid.org/0009-0007-8976-6617)
 
 | | |
-|---|---|
-| **Paper** | [doi.org/10.5281/zenodo.22836881](https://doi.org/10.5281/zenodo.22836881) |
-| **Interactive version** | *link to the app, to be added* |
+| **Paper** | [doi.org/10.5281/zenodo.22836880](https://doi.org/10.5281/zenodo.22836880) |
+| **Interactive version** | [supplyrestrictions.lavanito.com](https://supplyrestrictions.lavanito.com) |
 | **Blog post** | *link to the Substack post, to be added* |
 
 ## What the paper argues
