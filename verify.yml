@@ -1,0 +1,35 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Reproduce every figure printed in the paper (Python, 66 checks)
+        run: python python/verify.py
+
+      - name: Reproduce the published figures (JavaScript, 38 checks)
+        run: npm test
+
+      - name: Python and JavaScript agree over 4,000 random chains
+        run: python python/crosscheck.py
+
+      - name: Redraw the solution figure
+        run: python python/fig_solve.py

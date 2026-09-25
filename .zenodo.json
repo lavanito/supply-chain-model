@@ -1,0 +1,29 @@
+{
+  "upload_type": "software",
+  "title": "supply-chain-model: model, tests and paper source for 'Supply restrictions: where employment falls, and why'",
+  "creators": [
+    {
+      "name": "Mahadeva, Lavan",
+      "orcid": "0009-0007-8976-6617"
+    }
+  ],
+  "description": "<p>Python model and an independent JavaScript port of a production-chain model of supply restrictions, with tests that reproduce every figure printed in the working note <em>Supply restrictions: where employment falls, and why</em> (DOI 10.5281/zenodo.22836881). The Python reproduces all 66 printed figures; the JavaScript port reproduces 38 of them; the two agree over 4,000 randomly generated chains. The repository also holds the LaTeX source of the paper and a fact-check of every external claim.</p>",
+  "license": "MIT",
+  "keywords": [
+    "production chains",
+    "input restrictions",
+    "employment",
+    "elasticity of substitution",
+    "real wage resistance",
+    "immigration policy",
+    "H-2B"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.22836881",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-workingpaper",
+      "scheme": "doi"
+    }
+  ]
+}
