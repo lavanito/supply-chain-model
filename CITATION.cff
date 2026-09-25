@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the working note it supports, and this repository for the code itself."
+type: software
+title: "supply-chain-model: model, tests and paper source for 'Supply restrictions: where employment falls, and why'"
+authors:
+  - family-names: Mahadeva
+    given-names: Lavan
+    orcid: "https://orcid.org/0009-0007-8976-6617"
+repository-code: "https://github.com/lavanito/supply-chain-model"
+license: MIT
+version: "1.0.0"
+date-released: "2026-09-22"
+keywords:
+  - production chains
+  - input restrictions
+  - employment
+  - elasticity of substitution
+  - real wage resistance
+  - immigration policy
+  - H-2B
+preferred-citation:
+  type: report
+  title: "Supply restrictions: where employment falls, and why"
+  authors:
+    - family-names: Mahadeva
+      given-names: Lavan
+      orcid: "https://orcid.org/0009-0007-8976-6617"
+  year: 2026
+  doi: 10.5281/zenodo.22836881
+  publisher:
+    name: Zenodo
+  notes: "Working note v1.0"
