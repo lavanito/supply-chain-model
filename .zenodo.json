@@ -7,20 +7,21 @@
       "orcid": "0009-0007-8976-6617"
     }
   ],
-  "description": "<p>Python model and an independent JavaScript port of a production-chain model of supply restrictions, with tests that reproduce every figure printed in the working note <em>Supply restrictions: where employment falls, and why</em> (DOI 10.5281/zenodo.22836881). The Python reproduces all 66 printed figures; the JavaScript port reproduces 38 of them; the two agree over 4,000 randomly generated chains. The repository also holds the LaTeX source of the paper and a fact-check of every external claim.</p>",
+  "description": "<p>Python model and an independent JavaScript port of a production-chain model of supply restrictions, with tests that reproduce every figure printed in the working note <em>Supply restrictions: where employment falls, and why</em> (DOI 10.5281/zenodo.23019960; all versions 10.5281/zenodo.22836880). The Python reproduces all 61 printed figures; the JavaScript port reproduces 41 of them with its own linear solver; the two agree to about 1e-15 over 4,000 randomly generated chains. The repository also holds the LaTeX source of the paper and a fact-check of every external claim.</p>",
   "license": "MIT",
   "keywords": [
     "production chains",
     "input restrictions",
     "employment",
     "elasticity of substitution",
-    "real wage resistance",
+    "food dollar",
     "immigration policy",
+    "H-2A",
     "H-2B"
   ],
   "related_identifiers": [
     {
-      "identifier": "10.5281/zenodo.22836881",
+      "identifier": "10.5281/zenodo.23019960",
       "relation": "isSupplementTo",
       "resource_type": "publication-workingpaper",
       "scheme": "doi"
