@@ -40,12 +40,15 @@ WHAT SURVIVES FROM THE PHI VERSION
 
 3. The last producing stage has its own closed form at any supply elasticity:
 
-       E_S = p_S (1 - theta_{S+1})(sigma_S - sigma_{S+1}) eps_S / (eps_S + sigma_S)
+       E_S = p_S [sigma_S (1 - lambda) - eta] eps_S / (eps_S + sigma_S)
 
-   so employment at the last stage rises exactly when sigma_S > sigma_{S+1}:
+   so employment at the last stage rises exactly when sigma_S (1 - lambda) > eta:
    when the retailer substitutes away from what it buys faster than the household
-   substitutes away from what the retailer sells. The budget share cancels because
-   it both protects the wage and makes demand less elastic, by equal amounts.
+   substitutes away from what the retailer sells. At lambda = 0 the condition is
+   simply sigma_S > eta. In the special case lambda = theta_{S+1}, which is full
+   indexation to a basket this sector alone moves, the budget share cancels from
+   both sides and the condition becomes sigma_S > sigma_{S+1}, because the share
+   both protects the wage and makes demand less elastic by equal amounts.
 
 Requires numpy only.
 """
