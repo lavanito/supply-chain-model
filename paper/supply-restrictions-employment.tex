@@ -13,7 +13,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyfoot[L]{\footnotesize\color{gray}Mahadeva, \emph{Supply restrictions: where employment falls, and why}. Working note v1.0, September 2026.}
+\fancyfoot[L]{\footnotesize\color{gray}Mahadeva, \emph{Supply restrictions: where employment falls, and why}. Working note v1.1, September 2026.}
 \fancyfoot[R]{\footnotesize\color{gray}\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0.2pt}
@@ -33,7 +33,7 @@
 \begin{center}
 \begin{minipage}{0.92\textwidth}
 \small
-\textbf{Abstract.} Restricting the supply of one input at the top of a production chain reduces employment at every stage of it. This note sets out a chain of $S$ producing stages and a household, with the cost share, the elasticity of substitution and the elasticity of supply of own inputs all free to differ between stages, and reduces it to $S$ linear equations in $S$ unknowns. Employment at each stage then splits into three terms: employment per unit of output rises, output falls because the stages downstream buy less, and output falls because households buy less. Calibrated to the American H-2B visa cap and the USDA food dollar, a 20 percent rise in the price of seasonal labour reduces employment by 2.21 percent at harvesting, 1.03 percent at processing and 0.32 percent at retail; where pay follows the cost of living and the restricted input is used throughout the economy, every stage loses over five percent.
+\textbf{Abstract.} Restricting the supply of one input at the top of a production chain reduces output at every stage of it, and reduces employment at the stages nearest the restriction. This note sets out a chain of $S$ producing stages and a household, with the cost share, the elasticity of substitution and the elasticity of supply of own inputs all free to differ between stages, and reduces it to $S$ linear equations in $S$ unknowns. Employment at each stage then splits into three terms: employment per unit of output rises, output falls because the stages downstream buy less, and output falls because households buy less. Calibrated to the USDA food dollar and to a proposed cap on the American H-2A agricultural visa, a 20 percent rise in the price of seasonal farm labour cuts output by 2.40, 0.57 and 0.22 percent along the chain, and cuts employment by 1.23 percent at harvesting and 0.06 percent at processing while raising it by 0.19 percent at retail and food service. Whether the last stage gains or loses employment turns on whether it substitutes away from what it buys faster than households substitute away from what it sells.
 \end{minipage}
 \end{center}
 
@@ -42,9 +42,9 @@
 \begin{center}
 \begin{minipage}{0.92\textwidth}
 \footnotesize
-\textbf{Cite as:} Mahadeva, L. (2026). \emph{Supply restrictions: where employment falls, and why.} Working note v1.0. DOI: \href{https://doi.org/10.5281/zenodo.22836881}{10.5281/zenodo.22836881}.
+\textbf{Cite as:} Mahadeva, L. (2026). \emph{Supply restrictions: where employment falls, and why.} Working note v1.1. DOI: \href{https://doi.org/10.5281/zenodo.23019960}{10.5281/zenodo.23019960}. All versions: \href{https://doi.org/10.5281/zenodo.22836880}{10.5281/zenodo.22836880}.
 
-\textbf{Code and verification:} every number in this note is computed rather than typed. The model, and a script that recomputes all 66 printed figures and checks them against the text, are archived with this note.
+\textbf{Code and verification:} every number in this note is computed rather than typed. The model, and a script that recomputes all 61 printed figures and checks them against the text, are archived with this note.
 \end{minipage}
 \end{center}
 
@@ -61,8 +61,14 @@ I wrote this note because the policy they analysed seemed to me to be symptomati
 
 In 1973, Horst Rittel and Melvin Webber, a design theorist and an urban planner at the University of California, Berkeley, set out ten features that make a problem ``wicked''. Its definition is contested, there is no objective ``stopping rule'', answers are good or bad rather than true or false, and which explanation you accept depends on your own view of the world. Their warning was against treating such problems as tame. Their reason is the one this note is about — every wicked problem can be considered a symptom of another problem, and interventions treat the symptom at one point in the chain without making the extra effort to explain to the public that it is not that easy.
 
-\section{The Clemens and Lewis study}
+\section{The policy and the evidence}
 \label{sec:study}
+
+The United States has two seasonal work visas. H-2A covers agricultural work and carries no numerical limit: the Department of Homeland Security states that ``there are no annual limitations on the number of temporary foreign H-2A workers that may be admitted''. H-2B covers seasonal work outside agriculture and is capped at 66,000 a year.
+
+The policy this note is about would change the first of those. On 12 February 2026 Representative Pramila Jayapal and nine co-sponsors introduced H.R. 7541, the U.S. Farmworker Protection Act, whose official title is ``to protect United States workers by creating annual restrictions on the H--2A temporary worker program''. Its operative clause reads: ``The Secretary of Labor may not certify petitions covering more than 400,000 positions for a fiscal year.'' Positions the petitioner states will be filled by a worker represented by a bargaining representative are not counted. The stated reason is that the uncapped programme is undercutting local wages and jobs. That is a restriction on an input at the top of a chain, justified by the pay and jobs of workers further along it, which is the structure this note models.
+
+There is no experiment on capping H-2A, because H-2A has never been capped. There is one on H-2B, and it is the evidence the model's behaviour is taken from. So the behavioural parameters below come from one programme and the cost shares from a food chain that the other programme supplies. Section~\ref{sec:caveats} says what that transfer costs.
 
 The policy Michael Clemens and Ethan Lewis analysed restricted immigrant labour, with the stated aim of protecting the pay
 and jobs of American workers. The H-2B visa covers seasonal work outside agriculture: landscaping, seafood processing, forestry, hospitality. Ninety-eight percent of the jobs need no high school education, and employers ask for 1.2 months of experience on average.
@@ -126,11 +132,11 @@ Simplistic marketing of supply restriction policies typically ignores three thin
 
 How might taking account of these complexities matter? To answer this, I built a model to illustrate the scale using Clemens and Lewis's example.
 
-I set up a chain of three producing stages — harvesting, processing and packing, retail and food service — selling to households. Farms receive 11.8 cents of every dollar Americans spend on domestically produced food, which the USDA food dollar series measures. I matched that with cost shares of 0.40, 0.60 and 0.50 at the three stages, which multiply to 0.120. That 11.8 cents is what farms receive in total, not what they pay seasonal workers. I used it anyway, which overstates the share: for visa labour alone it is perhaps 0.01 to 0.03, and if so, every figure below falls in proportion (more on this later). I assumed each stage switches away from a dearer input slowly, by 0.15, 0.30 and 0.45 percent for each percent of change in relative prices, rising downstream. Those are well below the 0.8 to 2.2 that Clemens and Lewis measure, because one firm can hire another firm's workers while the whole sector cannot, and because I ruled out buying the intermediate input abroad. Food at home and at restaurants is about a seventh of total household consumption, which puts the price elasticity of food demand at 0.5 and gives food a weight of 0.15 in the index that pay follows. Seasonal work is the kind people move in and out of, so I assumed each stage can hire as much of its own inputs as it wants at the going rate: pay follows the cost of living, and employment takes the adjustment. The restriction itself is a 20 percent rise in the price of seasonal labour, which I guessed or assumed.
+I set up a chain of three producing stages — harvesting, processing and packing, retail and food service — selling to households. The cost shares are set so that the chain reproduces the USDA food dollar. Farms receive 11.8 cents of every dollar Americans spend on domestically produced food; retail trade takes 12.9 cents and food service 32.7, so the last stage's own costs are 45.6 cents and everything between the farm and the shop takes the remaining 42.6. That fixes two of the three shares at 0.544 and 0.217. The third is the share of farm costs paid to seasonal labour, which on specialty crop farms is 39 percent of total cash expenses, against 13 percent for American farms as a whole. Multiplying the three, seasonal farm labour is 4.6 cents of the food dollar.
 
-Employment falls at all three stages, and falls most in percentage terms at the stage the cap applies to: harvesting loses 2.21 percent, processing 1.03 percent and retail 0.32 percent. Output falls by more at each of them, by 3.38, 2.44 and 1.38 percent, because every stage employs more of its own inputs per unit of what it makes — between 1.06 and 1.41 percent more — which recovers part of the fall. No pay falls anywhere. All three factor prices rise by 0.41 percent, the rise in the cost of living, against selling prices that rise by 8.25 percent at the farm gate, 5.12 percent at wholesale and 2.76 percent on the shelf. Indexing pay to the cost of living takes the share of the original rise that reaches the shelf from 12 percent to 13.8 percent, so households buy 1.38 percent less rather than 1.20 percent less. That amplification is small, because food is about a seventh of total household consumption and the index barely moves.
+I assumed each stage switches away from a dearer input slowly, by 0.15, 0.30 and 0.45 percent for each percent of change in relative prices, rising downstream. Those are well below the 0.8 to 2.2 that Clemens and Lewis measure, because one firm can hire another firm's workers while the whole sector cannot, and because I ruled out buying the intermediate input abroad. The price elasticity of food demand is 0.24, which is the Economic Research Service's compensated estimate for the United States; with food at 15 percent of household consumption that implies a household elasticity of substitution of 0.282. Seasonal work is the kind people move in and out of, so I assumed each stage can hire as much of its own inputs as it wants at an unchanged rate of pay, and that this rate does not rise when the cost of living rises, so employment takes the whole adjustment. The restriction itself is a 20 percent rise in the price of seasonal labour, which I guessed.
 
-For an input used throughout the economy the same mechanism would be far larger.
+Output falls at every stage, by 2.40 percent at harvesting, 0.57 at processing and 0.22 at retail and food service. Employment falls at the two stages nearest the restriction, by 1.23 and 0.06 percent, and rises by 0.19 percent at the last one, because every stage employs more of its own inputs per unit of what it makes — between 0.41 and 1.17 percent more — which recovers part of the fall upstream and more than covers it at the end of the chain. No nominal pay changes anywhere, against selling prices that rise by 7.80 percent at the farm gate, 1.69 percent at wholesale and 0.92 percent at the shop. The cost of living rises 0.14 percent, so real pay falls by that much at every stage.
 
 \section{The model}
 \label{sec:model}
@@ -200,7 +206,7 @@ Pay follows the cost of living. Write $\pi$ for the percentage rise in the consu
 \pi \;=\; \lambda \, p_S , \qquad \lambda \in [0,1] .
 \end{equation}
 
-$\lambda$ is the share of the consumer basket whose price moves with the restricted input, multiplied by how fully pay is indexed to the index. Only the product of the two can be identified, so it is one parameter. For a single sector $\lambda$ is near that sector's budget share. For an input used throughout the economy it approaches one. Energy is about 6 percent of American household consumption and an input to most of the rest, so its $\lambda$ is well above that; getting it needs an input-output calculation rather than a reading off the published weights.
+$\lambda$ is the share of the consumer basket whose price moves with the restricted input, multiplied by how fully pay is indexed to that index. Only the product of the two can be identified, so it is one parameter, and it cannot exceed the basket share. Everything reported below sets it to zero, so pay does not follow the cost of living at all. It is carried through the algebra because the general case needs it, and because it is what a stage's own supply curve responds to.
 
 More of an input can usually be had only at a higher price. How much more is the elasticity of supply of stage-$s$ own inputs, $\varepsilon_s$, and it is the second and last parameter:
 
@@ -300,22 +306,22 @@ Each row now states one thing: stage $s$ and the stages downstream of it respond
 
 \subsubsection*{The example}
 
-At the calibration of Section~\ref{sec:example}, $S = 3$ and supply is perfectly elastic. So $\hat\sigma_m = 0$ at every stage, which means the price path does not depend on how easily any stage substitutes; substitution decides quantities only. And $d_s = -\lambda/(1-\lambda) = -0.1765$. With $\theta = (0.40, 0.60, 0.50)$ the system is
+At the calibration of Section~\ref{sec:example}, $S = 3$, supply is perfectly elastic and $\lambda = 0$. So $\hat\sigma_m = 0$ at every stage, which means the price path does not depend on how easily any stage substitutes; substitution decides quantities only. And $d_s = (\eta - \lambda \varepsilon_s)/c_s = 0$, because $\lambda = 0$ makes $c_s$ infinite. Both the diagonal correction and the whole upper triangle vanish. With $\theta = (0.390, 0.217, 0.544)$ the system is
 
 \begin{equation}
 \begin{pmatrix}
-\phantom{0}1.0706 & -0.0706 & -0.0882 \\
-\phantom{0}0.6000 & \phantom{-}1.1059 & -0.0882 \\
-\phantom{0}0.6000 & \phantom{-}0.4000 & \phantom{-}1.0882
+1.000 & 0.000 & 0.000 \\
+0.610 & 1.000 & 0.000 \\
+0.610 & 0.783 & 1.000
 \end{pmatrix}
 \begin{pmatrix} r_1 \\ r_2 \\ r_3 \end{pmatrix}
 =
 \begin{pmatrix} 0.20 \\ 0.20 \\ 0.20 \end{pmatrix} ,
 \qquad
-r = \begin{pmatrix} 0.1959 \\ 0.0783 \\ 0.0470 \end{pmatrix} .
+r = \begin{pmatrix} 0.2000 \\ 0.0780 \\ 0.0169 \end{pmatrix} .
 \end{equation}
 
-We have three equations, three unknowns, and one matrix inversion. Moving the lower triangle across gives the same three rows read the other way, each driven by the price that enters:
+$\tilde A$ is lower triangular with a unit diagonal, so nothing has to be inverted and the chain solves in one pass down. Each row is the price entering that stage:
 
 \begin{center}
 \small
@@ -323,14 +329,14 @@ We have three equations, three unknowns, and one matrix inversion. Moving the lo
 \toprule
 & \textbf{row} & \textbf{change in the price} \\
 \midrule
-$s=1$ & $1.0706\, r_1 - 0.0706\, r_2 - 0.0882\, r_3 = p_0$ & 20.000\% \\
-$s=2$ & $1.1059\, r_2 - 0.0882\, r_3 = p_1$ & \phantom{0}8.249\% \\
-$s=3$ & $1.0882\, r_3 = p_2$ & \phantom{0}5.115\% \\
+$s=1$ & $r_1 = p_0$ & 20.00\% \\
+$s=2$ & $r_2 = p_0 - 0.610\, r_1 = p_1$ & \phantom{0}7.80\% \\
+$s=3$ & $r_3 = p_0 - 0.610\, r_1 - 0.783\, r_2 = p_2$ & \phantom{0}1.69\% \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-The off-diagonal entries are small here because $\lambda$ is small. Set $\lambda = 0$ and they vanish: each stage would be settled by the price entering it and by nothing else, and the chain would solve in one pass down.
+So $r_s = p_{s-1}$ exactly: each stage is settled by the price entering it and by nothing else. The general case is not like this. A finite $\varepsilon_s$ fills the upper triangle through $\hat\sigma_m$, and a positive $\lambda$ fills it through $d_s$, and then the matrix has to be inverted.
 
 \subsubsection*{Recovering the rest}
 
@@ -416,11 +422,11 @@ l_S \;=\; p_S \,\big[\sigma_S (1-\lambda) - \eta\big] \, \frac{\varepsilon_S}{\v
 \label{eq:lastst}
 \end{equation}
 
-Employment at the last stage falls while $\sigma_S(1-\lambda) < \eta$ and rises above it. Two elasticities of substitution counteract each other. $\sigma_S$ is how readily the stage switches away from the input that has become dearer. $\eta$ is how readily its customers switch away from what it sells. The stage gains employment only if it can switch faster than its customers can.
+Employment at the last stage falls while $\sigma_S(1-\lambda) < \eta$ and rises above it. With $\lambda = 0$ the condition is simply $\sigma_S > \eta$. Two elasticities of substitution counteract each other. $\sigma_S$ is how readily the stage switches away from the input that has become dearer. $\eta$ is how readily its customers switch away from what it sells. The stage gains employment only if it can switch faster than its customers can.
 
-When the restriction moves the price of this sector and nothing else, $\lambda$ equals the household's budget share $\theta_{S+1}$. Since $\eta = \sigma_{S+1}(1-\theta_{S+1})$, the budget share then cancels from both sides and the condition is $\sigma_S > \sigma_{S+1}$. The share does two jobs of equal size in opposite directions: a larger share defends pay more, which reduces the stage's substitution, and makes demand less elastic, which reduces the fall in output.
+On the calibration of Section~\ref{sec:example} that is 0.45 against 0.24, so the last stage gains. It is not a large margin and the sign is the least robust thing in this note. Holding everything else, retail and food service employment is $-$0.08 percent at $\sigma_S = 0.15$, exactly zero at $\sigma_S = 0.24$, $+$0.19 at 0.45 and $+$0.52 at 0.80. Raising $\sigma_S$ also makes the two upstream stages worse, because a retailer that substitutes more easily buys less farm produce: at $\sigma_S = 0.80$ harvesting loses 1.50 percent against 1.23, and processing 0.33 percent against 0.06.
 
-So a small budget share does not protect employment in the last stage, and plentiful substitutes for what the chain produces do not help it either. Both work the other way. Cutting the budget share from 0.60 to 0.05 takes it from $-$0.28 to $-$0.33 percent. Raising $\sigma_{S+1}$ from 0.2 to 2.0 on the calibration of Section~\ref{sec:example} takes retail employment from $+$0.59 percent to $-$3.64 percent as customers switch (from restaurant meals to home cooking). What does change the sign is the stage's own $\sigma_S$ and its ability to adapt its offering out of the restricted chain: at 0.45 retail loses 0.32 percent, at 0.59 it breaks even, and at 1.0 it gains 0.97 percent.
+One special case is worth recording even though it is not the one used here. If pay were fully indexed and the restriction moved the price of this sector and nothing else, $\lambda$ would equal the household's budget share $\theta_{S+1}$. Since $\eta = \sigma_{S+1}(1-\theta_{S+1})$, the budget share then cancels from both sides and the condition becomes $\sigma_S > \sigma_{S+1}$. The share does two jobs of equal size in opposite directions: a larger share defends pay more, which reduces the stage's substitution, and makes demand less elastic, which reduces the fall in output. So a small budget share does not protect employment in the last stage, and plentiful substitutes for what the chain produces do not help it either.
 
 It is also useful to look at cost shares. Let $\theta_s$ be the share of stage-$s$ revenue paid out for the intermediate input, and multiply these shares along the chain:
 
@@ -433,11 +439,11 @@ It is also useful to look at cost shares. Let $\theta_s$ be the share of stage-$
 $\Omega$ from f to k is the cost share of stage-f output in the value of stage-k output. $\Omega$ from 0 to S is the value of the restricted input as a share of what final households spend.
 
 
-\subsection{A special case}
+\subsection{The case the calibration uses}
 \label{sec:special}
 
 
-$\tilde A$ is lower triangular when $d_s - \hat\sigma_m = 0$ for every $m > s$, which happens when supply is perfectly elastic and $\lambda = 0$. Then the chain solves in two passes, one down and one back. Each parameter fills the upper triangle in its own way: a finite $\varepsilon_s$ through $\hat\sigma_m$, which is the stages downstream cutting their purchases, and $\lambda$ through $d_s$, which is their effect on the cost of living.
+$\tilde A$ is lower triangular when $d_s - \hat\sigma_m = 0$ for every $m > s$, which happens when supply is perfectly elastic and $\lambda = 0$. That is the case Section~\ref{sec:example} uses, so the chain there solves in two passes, one down and one back, with nothing inverted. Each parameter fills the upper triangle in its own way: a finite $\varepsilon_s$ through $\hat\sigma_m$, which is the stages downstream cutting their purchases, and a positive $\lambda$ through $d_s$, which is their effect on the cost of living.
 
 \begin{center}
 \fbox{\begin{minipage}{0.94\textwidth}
@@ -459,12 +465,12 @@ The second expression is a multiplier. Write the effective cumulative share as
 \;=\; \Omega_{0 \to S}\,\Big[\, 1 + \lambda(1-\Omega_{0 \to S}) + \lambda^2 (1-\Omega_{0 \to S})^2 + \dots \Big] .
 \end{equation}
 
-The price rise lifts the cost of living by $\lambda$ of it, which lifts every wage, which lifts prices again by the share that wages account for. Each round is $\lambda(1-\Omega)$ of the one before. That fraction is the leakage.
+The price rise lifts the cost of living by $\lambda$ of it, which lifts every wage, which lifts prices again by the share that wages account for. Each round is $\lambda(1-\Omega)$ of the one before. That fraction is the leakage. At $\lambda = 0$ there is no second round: $\tilde\Omega = \Omega$, and each stage's price is simply the cumulative cost share times the price of the restricted input.
 \smallskip
 \end{minipage}}
 \end{center}
 
-What an input costs as a share of the final price can be estimated. How much of a rise in its price reaches the buyer also depends on how much of the rest of the basket moves with it, and on how many times round the chain that feeds back.
+What an input costs as a share of the final price can be measured, and Section~\ref{sec:example} measures it. How much of a rise in its price reaches the buyer depends on that share alone once pay is not indexed, which is the case used throughout.
 
 \begin{figure}[htbp]
 \centering
@@ -472,10 +478,12 @@ What an input costs as a share of the final price can be estimated. How much of 
 \end{figure}
 
 
-\section{The Clemens and Lewis example}
+\section{A cap on seasonal farm labour}
 \label{sec:example}
 
-Now that the model has been explained, I can apply it to the example of US farming. I assume three producing stages --- harvesting, processing and packing, retail and food service --- and the household. The third stage covers every commercial activity that sells food for consumption: shops, restaurants, canteens, caterers and takeaways. The good is all food, wherever a household buys it.
+Now that the model has been explained, I can apply it to US farming. I assume three producing stages --- harvesting, processing and packing, retail and food service --- and the household. The third stage covers every commercial activity that sells food for consumption: shops, restaurants, canteens, caterers and takeaways. The good is all food, wherever a household buys it. The restricted input is seasonal farm labour, which harvesting buys.
+
+Every cost share is measured rather than chosen, and together they reproduce the USDA food dollar: 4.6 cents to seasonal farm labour, 7.2 cents to the farm's other inputs, 42.6 cents to processing and everything between it and the shop, and 45.6 cents to retail and food service.
 
 \begin{table}[htbp]
 \centering
@@ -484,13 +492,17 @@ Now that the model has been explained, I can apply it to the example of US farmi
 \toprule
 \textbf{Parameter} & \textbf{Value} & \textbf{Where it comes from} \\
 \midrule
-$\Omega$ from 0 to 3 & 0.118 & Measured. This is the value of farm output as a share of household food spending, and the USDA food dollar series reports it: farms received 11.8 cents of every dollar Americans spent on domestically produced food in 2024. \\
-$\theta_1$, $\theta_2$, $\theta_3$ & 0.40, 0.60, 0.50 & Chosen to multiply to the measured $\Omega$. The USDA marketing bill divides the other 88 cents between processing, packaging, transport, wholesale and retail, so these three could be measured too. \\
+$\Omega$ from 1 to 3 & 0.118 & Measured. This is the value of farm output as a share of household food spending, and the USDA food dollar series reports it: farms received 11.8 cents of every dollar Americans spent on domestically produced food in 2024. It fixes the product $\theta_2 \theta_3$. \\
+$\theta_3$ & 0.544 & Measured. The USDA food dollar industry shares put retail trade at 12.9 cents and food service at 32.7, so the last stage's own costs are 45.6 cents and the share it pays out for what it buys is 0.544. \\
+$\theta_2$ & 0.217 & Measured, as $0.118 / 0.544$. Everything between the farm gate and the shop --- processing, packing, transport, wholesale, energy, advertising, finance --- is one stage here, and it takes 42.6 cents of the food dollar. \\
+$\theta_1$ & 0.39 & Measured. Labour is 39 percent of total cash expenses on specialty crop farms, against 13 percent for American farms as a whole; over 2006 to 2010 the figure was 48 percent for fruit, 35 for vegetables and 46 for nursery. The chain here is harvesting labour-intensive crops. \\
+$\Omega$ from 0 to 3 & 0.046 & The product of the three. Seasonal farm labour is 4.6 cents of the food dollar, and this is the share of its price rise that reaches the shop. \\
 $\sigma_1$, $\sigma_2$, $\sigma_3$ & 0.15, 0.30, 0.45 & Rising downstream. Harvesting is tied to land, season and crop. Processing can change product mix, shorten the season or buy in produce. Retail and food service can change what they stock, though not by much once importing is ruled out: a shop cannot sell more groceries by hiring more staff. On $\sigma_1$: Clemens and Lewis measure 0.8 to 2.2, but that is a firm-level number --- one firm can hire another firm's US workers, while the sector cannot hire its own, and their investment result says equipment and visa labour are used together rather than one instead of the other. So I use a figure well below their range. \\
-$\lambda$ & 0.15 & Food at home and at restaurants is about a seventh of total household consumption, which the BLS relative importance weights put at 13.7 percent in December 2024. This restriction moves the price of nothing else, so $\lambda$ is this budget share. \\
-$\varepsilon_1$, $\varepsilon_2$, $\varepsilon_3$ & perfectly elastic & Seasonal low-skill work is the kind people move in and out of, so the supply of it to a sector is close to perfectly elastic and the adjustment falls on employment. Section~\ref{sec:range} varies this. \\
-$\theta_4$, $\sigma_4$ & 0.15, 0.59 & The household. Food at home and at restaurants takes about a seventh of total household consumption and has few substitutes. The demand elasticity follows from the two: $\eta = \sigma_4(1-\theta_4) = 0.59 \times 0.85 = 0.5$. I set $\sigma_4$ to reach 0.5, so that number is a choice rather than a measurement. Section~\ref{sec:hosp} uses hospitality instead. \\
-Rise in $P_X$ & +20\% & A guess, but one that can be re-expressed as a quantity using the demand elasticity of the restricted input. \\
+$\lambda$ & 0 & Pay does not follow the cost of living. Nominal pay is unchanged and employment takes the whole adjustment. \\
+$\varepsilon_1$, $\varepsilon_2$, $\varepsilon_3$ & perfectly elastic & Seasonal low-skill work is the kind people move in and out of, so the supply of it to a sector is close to perfectly elastic and the adjustment falls on employment. Section~\ref{sec:range} varies this down to fixed supply, where pay adjusts instead. \\
+$\eta$ & 0.24 & Measured. The compensated own-price elasticity of aggregate food demand for the United States, from Muhammad, Seale, Meade and Regmi (2011), estimated on 2005 International Comparison Program data at a food budget share of about 14 percent. \\
+$\theta_4$, $\sigma_4$ & 0.15, 0.282 & The household. Food at home and at restaurants takes about 15 percent of total household consumption. The substitution elasticity follows from the measured demand elasticity and that share: $\sigma_4 = \eta/(1-\theta_4) = 0.24/0.85 = 0.282$. \\
+Rise in $P_X$ & +20\% & A guess, but one that can be re-expressed as a quantity using the demand elasticity of the restricted input, which Section~\ref{sec:caveats} does. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -500,27 +512,25 @@ Rise in $P_X$ & +20\% & A guess, but one that can be re-expressed as a quantity 
 
 \begin{center}
 \small
-\begin{tabular}{lrrr}
+\begin{tabular}{lrr}
 \toprule
- & \textbf{$\Omega$ from 0 to s} & \textbf{weight on the cost of living} & \textbf{Price rise} \\
+ & \textbf{$\Omega$ from 0 to s} & \textbf{Price rise} \\
 \midrule
-Seasonal labour, $P_X$ & 1.000 & 0.000 & +20.00\% \\
-Farm gate, $P_{1}$ & 0.400 & 0.600 & +8.25\% \\
-Wholesale packed, $P_{2}$ & 0.240 & 0.760 & +5.12\% \\
-Retail shelf, $P_{3}$ & 0.120 & 0.880 & +2.76\% \\
+Seasonal farm labour, $P_X$ & 1.0000 & +20.00\% \\
+Farm gate, $P_{1}$ & 0.3900 & \phantom{0}+7.80\% \\
+Wholesale packed, $P_{2}$ & 0.0846 & \phantom{0}+1.69\% \\
+Retail, $P_{3}$ & 0.0460 & \phantom{0}+0.92\% \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Each price is the cost share times 20 percent, plus one minus the cost share times the 0.41 percent rise in the cost of living. At the farm gate the first dominates. At the shelf the second is most of the weight, but it is multiplied by a very small number.
+Each price is the cumulative cost share times 20 percent, and nothing else. With pay unindexed there is no feedback from the cost of living into costs, so the effective cumulative share is the cost share itself. Seasonal farm labour is 4.6 cents of the food dollar, so 4.6 percent of its price rise reaches the shop.
 
-Seasonal labour is 12 cents of the food dollar. With no indexation at all the shelf price would rise by 2.40 percent, which is 12 percent of 20. With pay indexed to the cost of living it rises by 2.76 percent, which is 13.8 percent of 20. The effective cumulative share is 0.138 against a cost share of 0.120, a ratio of 1.15.
+The chain absorbs the rest. A 20 percent rise at the top arrives as 0.92 percent at the till: more than 95 percent of it is absorbed along the way, by the farm's own inputs, by processing's, and by retail's. That absorption is not painless, and the next section is what it costs.
 
-That is a small amplification. Food is about a seventh of total household consumption, so a 2.76 percent rise in its price moves the cost of living by 0.41 percent. Pay indexed to a share that small implies a small wage increase even for a 20 percent input price rise. For an input used throughout the economy, the same mechanism is much larger, which is Section~\ref{sec:everywhere}. That goes to show how important budget shares are, and how important that policies are not devised in isolation of other known (or even known unknown) cost of living changes.
+Food is about 15 percent of total household consumption, so a 0.92 percent rise in its price moves the cost of living by 0.14 percent. No nominal pay changes anywhere, so real pay falls by that 0.14 percent at every stage. Against selling prices that rise by 7.80, 1.69 and 0.92 percent, that leaves a gap at every stage, and employment moves instead.
 
-No factor price falls anywhere, but rises are also small. All three rise by 0.41 percent, the rise in the cost of living, because supply is elastic and pay tracks the index. Against selling prices that rise by 8.25, 5.12 and 2.76 percent, that leaves a large gap at every stage, and employment moves instead.
-
-\subsection{Output falls and employment falls at every stage}
+\subsection{Output falls at every stage; employment falls upstream}
 \label{sec:empl}
 
 \begin{center}
@@ -531,9 +541,9 @@ No factor price falls anywhere, but rises are also small. All three rise by 0.41
  & \multicolumn{1}{c}{Employment} & \multicolumn{2}{c}{Output falls because} & \multicolumn{1}{c}{Output} & \multicolumn{1}{c}{Employment} \\
  & \multicolumn{1}{c}{per unit output} & stages downstream & households & & \\
 \midrule
-Harvesting & +1.18\% & $-$2.00\% & $-$1.38\% & $-$3.38\% & \textbf{$-$2.21\%} \\
-Processing & +1.41\% & $-$1.06\% & $-$1.38\% & $-$2.44\% & \textbf{$-$1.03\%} \\
-Retail and food service & +1.06\% & \phantom{$-$}0.00\% & $-$1.38\% & $-$1.38\% & \textbf{$-$0.32\%} \\
+Harvesting & +1.17\% & $-$2.18\% & $-$0.22\% & $-$2.40\% & \textbf{$-$1.23\%} \\
+Processing & +0.51\% & $-$0.35\% & $-$0.22\% & $-$0.57\% & \textbf{$-$0.06\%} \\
+Retail and food service & +0.41\% & \phantom{$-$}0.00\% & $-$0.22\% & $-$0.22\% & \textbf{+0.19\%} \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -547,10 +557,10 @@ The same figures through the recursion, which shows what each stage does rather 
  & Cost share & Shift in input mix & Kept by the stage & Employment \\
  & $\theta_s$ & $\alpha_s$ & $\theta_s \alpha_s$ & $l_s$ \\
 \midrule
-Harvesting & 0.40 & +2.94\% & +1.18\% & \textbf{$-$2.21\%} \\
-Processing & 0.60 & +2.35\% & +1.41\% & \textbf{$-$1.03\%} \\
-Retail and food service & 0.50 & +2.12\% & +1.06\% & \textbf{$-$0.32\%} \\
-Household & 0.15 & +1.63\% & +0.24\% & \textbf{+0.24\%}$^{*}$ \\
+Harvesting & 0.390 & +3.00\% & +1.17\% & \textbf{$-$1.23\%} \\
+Processing & 0.217 & +2.34\% & +0.51\% & \textbf{$-$0.06\%} \\
+Retail and food service & 0.544 & +0.76\% & +0.41\% & \textbf{+0.19\%} \\
+Household & 0.150 & +0.26\% & +0.04\% & \textbf{+0.04\%}$^{*}$ \\
 \bottomrule
 \end{tabular}
 
@@ -560,22 +570,15 @@ Household & 0.15 & +1.63\% & +0.24\% & \textbf{+0.24\%}$^{*}$ \\
 \end{minipage}
 \end{center}
 
-We work up the rows from the bottom. The household shifts its mix by 1.63 percent and keeps 0.15 $\times$ 1.63 = 0.24 percent of that as extra spending on everything else. Retail then gets 0.24 + 1.06 $-$ 1.63 = $-$0.32 percent: it keeps 1.06 of its own shift and loses the household's whole 1.63. Processing gets $-$0.32 + 1.41 $-$ 2.12 = $-$1.03 percent, losing retail's whole 2.12. Harvesting gets $-$1.03 + 1.18 $-$ 2.35 = $-$2.21 percent, losing processing's whole 2.35.
+We work up the rows from the bottom. The household shifts its mix by 0.26 percent and keeps 0.15 $\times$ 0.26 = 0.04 percent of that as extra spending on everything else. Retail then gets 0.04 + 0.41 $-$ 0.26 = $+$0.19 percent: it keeps 0.41 of its own shift and loses the household's whole 0.26, and because its own shift is the larger of the two it ends up hiring. Processing gets 0.19 + 0.51 $-$ 0.76 = $-$0.06 percent, losing retail's whole 0.76. Harvesting gets $-$0.06 + 1.17 $-$ 2.34 = $-$1.23 percent, losing processing's whole 2.34.
 
-We can read the rows across. Each stage employs more per unit of output, between 1.06 and 1.41 percent more. At every stage output falls by more than that, so employment falls at all three.
+We can read the rows across. Each stage employs more per unit of output, between 0.41 and 1.17 percent more. At the two upstream stages output falls by more than that, so employment falls. At the last stage it does not, so employment rises.
 
-The household column is one number. Households buy 1.38 percent less, so output falls 1.38 percent at every stage on that account. No firm's decisions change it.
+The household column is one number. Households buy 0.22 percent less, so output falls 0.22 percent at every stage on that account. No firm's decisions change it.
 
-The other two columns are where the stages differ. Harvesting's output falls a further 2.00 percent because processing and retail buy less per unit of their own output. Processing's falls a further 1.06 percent because retail does. Retail's does not fall at all on this account, because no producing stage buys from it.
+The other two columns are where the stages differ. Harvesting's output falls a further 2.18 percent because processing and retail buy less per unit of their own output. Processing's falls a further 0.35 percent because retail does. Retail's does not fall at all on this account, because no producing stage buys from it. That asymmetry is why the last stage is the one that can gain: it carries the household term and nothing else.
 
-\textbf{The conclusions on retail are the most sensitive.} The closed form in equation~(\ref{eq:lastst}) says the last stage loses employment only while $\sigma_3 < \sigma_4$. Here that is 0.45 against 0.59, so retail loses, but not by much: 0.32 percent. Push $\sigma_3$ above 0.59 --- which is what you would get if a supermarket could switch to imported food or any other unrestricted input, the thing this model rules out --- and retail gains jobs instead.
-
-\subsection{Hospitality}
-\label{sec:hosp}
-
-Not every H-2B chain ends at a supermarket. Hospitality, amusement and golf together are a sizeable part of the programme. Households substitute away from those services more readily, and they take a twentieth of total household consumption rather than a seventh, so $\eta$ = 1.5 and $\lambda$ = 0.05.
-
-Employment falls by 4.60, 3.41 and 2.69 percent, and the shelf price rises 2.51 percent. The losses are larger at every stage and the gap between stages is smaller, because the household term is larger and the same at each of them.
+\textbf{The conclusion on retail is the most sensitive thing here.} The closed form in equation~(\ref{eq:lastst}) says the last stage gains employment only while $\sigma_3 > \eta$. Here that is 0.45 against 0.24, so retail gains, by 0.19 percent. Take $\sigma_3$ down to 0.24 and it breaks even; below that it loses like the others. That number is argued rather than measured, and Section~\ref{sec:caveats} says so again.
 
 \subsection{How much of this holds over a range}
 \label{sec:range}
@@ -586,47 +589,24 @@ Lowering $\varepsilon$ moves the adjustment from jobs to pay, and cannot change 
 \small
 \begin{tabular}{lrrr}
 \toprule
-$\varepsilon$ at every stage & Shelf price & Factor prices & Employment \\
+$\varepsilon$ at every stage & Retail price & Factor prices & Employment \\
 \midrule
-perfectly elastic & +2.76\% & +0.41, +0.41, +0.41 & $-$2.21, $-$1.03, $-$0.32 \\
-5 & +2.60\% & $-$0.02, +0.21, +0.33 & $-$2.06, $-$0.92, $-$0.28 \\
-2 & +2.41\% & $-$0.57, $-$0.04, +0.25 & $-$1.87, $-$0.80, $-$0.23 \\
-1 & +2.18\% & $-$1.30, $-$0.32, +0.15 & $-$1.63, $-$0.64, $-$0.18 \\
-0.5 & +1.88\% & $-$2.31, $-$0.64, +0.05 & $-$1.30, $-$0.46, $-$0.12 \\
-0.2 & +1.49\% & $-$3.83, $-$0.97, $-$0.05 & $-$0.81, $-$0.24, $-$0.05 \\
-0 (supply fixed) & +0.95\% & $-$6.46, $-$1.16, $-$0.11 & 0, 0, 0 \\
+perfectly elastic & +0.92\% & \phantom{$-$}0.00, \phantom{$-$}0.00, \phantom{+}0.00 & $-$1.23, $-$0.06, +0.19 \\
+5 & +0.92\% & $-$0.23, $-$0.01, +0.04 & $-$1.17, $-$0.05, +0.18 \\
+2 & +0.91\% & $-$0.54, $-$0.02, +0.08 & $-$1.09, $-$0.04, +0.16 \\
+1 & +0.90\% & $-$0.98, $-$0.03, +0.13 & $-$0.98, $-$0.03, +0.13 \\
+0.5 & +0.87\% & $-$1.62, $-$0.04, +0.19 & $-$0.81, $-$0.02, +0.10 \\
+0.2 & +0.83\% & $-$2.70, $-$0.04, +0.27 & $-$0.54, $-$0.01, +0.05 \\
+0 (supply fixed) & +0.72\% & $-$4.87, $-$0.02, +0.33 & \phantom{$-$}0.00, \phantom{$-$}0.00, \phantom{+}0.00 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-At the bottom row nobody loses a job and harvesting takes a 6.46 percent pay cut instead. Harvesting loses in all cases. At the top row it loses 2.21 percent of its jobs, at the bottom row it keeps them all and loses 6.46 percent of its pay. Between the two ends the loss is shared, and the total loss is largest at the top: the shelf price rises most, so households buy least, when pay is defended.
+At the bottom row nobody loses a job and harvesting takes a 4.87 percent cut in what it pays its own inputs instead. Harvesting bears the cost in all cases. At the top row it loses 1.23 percent of its employment, at the bottom row it keeps it all and pays 4.87 percent less. Between the two ends the loss is shared, and the total loss is largest at the top: the retail price rises most, so households buy least, when pay is held up.
 
-\section{When the input is used everywhere}
-\label{sec:everywhere}
+The last stage gains either way, and which market it gains in is what $\varepsilon$ decides. With supply perfectly elastic it hires 0.19 percent more people at unchanged pay. With supply fixed it hires nobody extra and pays 0.33 percent more. The condition behind both is the same one, $\sigma_3$ against $\eta$. What $\varepsilon$ changes is whether the gain shows up in jobs or in pay, which is the mirror of what it does to harvesting.
 
-Everything above has $\lambda$ = 0.15, because this restriction moves the price of food and nothing else. Raise $\lambda$ and the same mechanism is a macroeconomic event.
-
-\begin{center}
-\small
-\begin{tabular}{lrrrr}
-\toprule
-$\lambda$ & Effective share & Shelf price & Cost of living & Employment \\
-\midrule
-0 (pay not indexed) & 0.120 & +2.40\% & 0.00\% & $-$2.04, $-$0.84, $-$0.12 \\
-0.15 (food alone) & 0.138 & +2.76\% & +0.41\% & $-$2.21, $-$1.03, $-$0.32 \\
-0.30 & 0.163 & +3.26\% & +0.98\% & $-$2.43, $-$1.29, $-$0.60 \\
-0.50 & 0.214 & +4.29\% & +2.14\% & $-$2.89, $-$1.82, $-$1.18 \\
-0.70 & 0.313 & +6.25\% & +4.38\% & $-$3.78, $-$2.84, $-$2.28 \\
-0.90 & 0.577 & +11.54\% & +10.38\% & $-$6.17, $-$5.60, $-$5.25 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-At $\lambda$ = 0.9 a 20 percent rise in one input's price raises the shelf price by 11.5 percent, raises the cost of living by 10.4, and costs every stage between 5.3 and 6.2 percent of its employment. The effective share is 0.577 against a cost share of 0.120: the input matters five times its weight in costs.
-
-This result is explained by two things. Pay indexed to an index that is itself rising feeds back into costs, which raises the index again. And as $\lambda$ rises the stages become alike, because the household term grows and the terms that differ between stages shrink. At $\lambda$ = 0.9 the spread across the three stages is 0.9 points; at $\lambda$ = 0.15 it is 1.9.
-
-This is oil, and it is what Michael Bruno and Jeffrey Sachs called real wage resistance in 1985, when they explained why the oil shocks of the 1970s led to much higher unemployment in some economies than in others, and attributed the difference to how far real wages adjusted. Energy is about 6 percent of American household consumption and an input to most of the rest, so its $\lambda$ is far above its direct weight. Tariffs on inputs used everywhere belong in the same group. What this shows is that the risk of wage resistance is real.
+Bruno and Sachs made this the centre of their account of the 1970s oil shocks, which led to much higher unemployment in some economies than in others; they attributed the difference to how far real wages adjusted. In this model that difference is $\varepsilon$, and the two ends of this table are the two cases they contrasted.
 
 \section{Objections}
 \label{sec:obj}
@@ -635,7 +615,7 @@ I take these from what is argued in public. Some would change the policy conclus
 
 \subsection{It is the employer that sets the wage}
 
-The objection. An H-2B worker cannot change employer without losing the right to work. So the employer sets the wage rather than the market, and it is below the revenue the last worker brings in, as in a monopsonistic labour market. A constraint on the employer can then raise pay without cutting employment, in the same way a minimum wage can where one buyer faces many sellers of labour. A cap on visas is one such constraint.
+The objection. A seasonal visa worker cannot change employer without losing the right to work, under H-2A as under H-2B. So the employer sets the wage rather than the market, and it is below the revenue the last worker brings in, as in a monopsonistic labour market. A constraint on the employer can then raise pay without cutting employment, in the same way a minimum wage can where one buyer faces many sellers of labour. A cap on visas is one such constraint.
 
 My answer. We first need to be sure that these markets are monopsonistic. One piece of evidence we would need to see is that firms hold abnormal profit at the stage where the input is restricted. My chain assumes abnormal profit is zero or constant, so I have assumed that surplus away rather than shown it is absent. Another interesting area to investigate is the mobility of workers and tasks that can be unbundled. But if markets were monopsonistic and if nothing could be done about that, it might make a difference and the model should be extended or changed.
 
@@ -646,13 +626,13 @@ The objection. Some inputs have negative externalities and unacceptable features
 
 My answer. That could of course be valid. What my figures supply is the size of the loss, and what that depends on. Too often, that is not mentioned in the debate. Yes, some industries are so repugnant that we would want to ignore the employment and income costs of shutting them down. But I think we should be careful not to overuse that argument to where we cannot afford it. After all, in times of economic distress, governments have ended the prohibition of banned items in an effort to stimulate the economy and had to become more pragmatic.
 
-In this case, the public should be aware that any negative externality removed from using seasonal farm labour could imply a 2.21 percent fall in employment at harvesting and possibly shrink the industry.
+In this case, the public should be aware that any negative externality removed from using seasonal farm labour could imply a 1.23 percent fall in employment at harvesting, a 2.40 percent fall in its output, and a fall in output at every other stage of the chain.
 
 \subsection{Wages divide a surplus and do not measure a product}
 
 The objection. Marginal products are the wrong way of doing this. Pay is a share of a surplus, settled by bargaining power. Restrict labour supply and the workers' share rises and the owners' share falls. Employment need not move, because firms have margins to absorb the change.
 
-My answer. The objection treats restricting migrant labour as restricting all labour. It is not. It removes something the remaining workers work alongside, so their marginal product can fall rather than rise, and with it, either their pay or their employment chances. The model says which: with supply perfectly elastic harvesting loses 2.21 percent of its jobs, and with supply fixed it keeps them all and takes a 6.46 percent pay cut. Neither is a share moving towards workers.
+My answer. The objection treats restricting migrant labour as restricting all labour. It is not. It removes something the remaining workers work alongside, so their marginal product can fall rather than rise, and with it, either their pay or their employment chances. The model says which: with supply perfectly elastic harvesting loses 1.23 percent of its jobs, and with supply fixed it keeps them all and pays 4.87 percent less for them. Neither is a share moving towards workers.
 
 I cannot settle the question inside the model, because zero abnormal profit assumes away the surplus the objection is about. Yet if that were true, the pay and employment of the workers already here should rise where migrant hiring was cut. Clemens and Lewis found that employment of low-skill American workers at the losing firms did not rise, and in the rural sample they specified in advance the two moved together, at 0.61.
 
@@ -675,27 +655,25 @@ To be fair to Clemens and Lewis, their experiment was at a firm by firm level, w
 
 On the employment of American workers, I said above that native hiring did not rise and may have fallen slightly.  Clemens and Lewis estimate how American employment moves with H-2B employment at $+0.10$, which is not statistically different from zero. Losing the draw cut H-2B employment by about half, a fall of 0.62 in natural logs. Multiplying the two gives 0.062, a fall of about 6 percent in American employment. Zero is still inside the range, and so is a fall of that magnitude.
 
-The chain is not the chain the experiment studied either. H-2B is non-agricultural, and in the authors' survey the largest group of requested workers is groundskeeping and outdoor maintenance, between 36 and 46 percent depending on which version of their paper you read. Seafood processing, the part of the programme that does run through a food chain, is 6 to 10 percent. I use food because the cost shares along it are measured and published. The mechanism is general. The calibration illustrates it and does not model the programme.
+The chain is not the chain the experiment studied either, and this is the largest single weakness. The policy I model is a cap on H-2A, the agricultural visa. The experiment is on H-2B, the non-agricultural one: in the authors' survey the largest group of requested workers is groundskeeping and outdoor maintenance, between 36 and 46 percent depending on which version of their paper you read, and seafood processing, the part of the programme that does run through a food chain, is 6 to 10 percent. So the cost shares come from a chain the H-2A programme supplies and the behaviour comes from firms in a different programme. I do it that way because H-2A has never been capped, so there is no experiment on it, and because the food dollar is measured and published. A reader who thinks landscaping firms and strawberry growers respond differently should discount accordingly.
 
-The result does depend especially on two of my chosen parameter values. At the top of the chain, harvesting loses employment only while $\sigma_1$ stays low enough that shifting its input mix does not outweigh its falling output; I use 0.15 against the 0.8 to 2.2 that Clemens and Lewis measure at firm level, for the reason given in Section~\ref{sec:example}. At the bottom, retail keeps losing employment only while $\sigma_3$ stays below $\sigma_4$, 0.45 against 0.59. Both numbers are argued rather than estimated, and the sign at each end of the chain turns on them.
+The result depends especially on two of my chosen parameter values, and the sign at each end of the chain turns on them. At the top, harvesting loses employment only while $\sigma_1$ stays below 0.308 on this calibration; I use 0.15, against the 0.8 to 2.2 that Clemens and Lewis measure at firm level, for the reason given in Section~\ref{sec:example}. At the bottom, retail gains employment only while $\sigma_3$ stays above $\eta$, 0.45 against 0.24. Neither is estimated. Atalay (2017) estimates the elasticity between a stage's bought-in inputs and its own value added at 0.84 to 0.88 across thirty American industries, which is far above both of mine; at 0.85 everywhere every stage in this chain would gain employment, by 0.56 percent each, and the result would reverse. My defence is the horizon. A seasonal cap bites within a season, and Boehm, Flaaen and Pandalai-Nayar (2019) find that over months firms substitute between inputs barely at all. These are short-run elasticities and the note is a short-run result.
 
 In principle the substitution elasticities $\sigma_s$ have no upper bound. They can be any non-negative number: zero is fixed input proportions, one is Cobb-Douglas, and large values are close substitutes. For example $\sigma_s$ might have to adjust where imported alternatives were easily accessible. Policy people call that leakage. A crab processor that can buy imported crab meat has a high $\sigma_2$ and loses less employment, and the fall moves further upstream to the domestic harvesters. The same policy reduces employment for different workers depending on whether the intermediate input can be imported, and I have not measured which.
 
-As I note in Section~\ref{sec:ignore}, the 11.8 cents may not be the correct value. It is the cost share of all farm value in the food dollar, and hired seasonal labour is a minority of farm cash costs. For visa labour alone the cumulative share is perhaps 0.01 to 0.03, and all three terms fall with it.
+The 11.8 cents is the share of the food dollar paid to farms, not to seasonal labour, and an earlier draft of this note used it as though it were the latter. It is not. Here it fixes $\theta_2 \theta_3$, and the labour share of farm costs supplies $\theta_1$ on top of it, so the restricted input is 4.6 cents rather than 11.8. Whether 0.39 is the right labour share depends on which crops the chain is meant to be; for American farms as a whole it is 0.13, which would put the restricted input at 1.5 cents and cut every figure here by two thirds.
 
-A visa cap restricts a quantity, not a price, and my 20 percent could be off. The model does map one to the other: on this calibration the demand for seasonal labour has an elasticity of 0.26, so a 20 percent rise in its price is a 5.1 percent cut in the quantity of it. Read the other way, a 10 percent cut needs a 39 percent price rise.
-
-$\lambda$ is not a published figure. It is the share of the consumer basket whose price moves, direct and indirect, so the direct budget share is a floor on it and a full estimate needs an input-output calculation. For food the two are close. For energy they are not.
+A visa cap restricts a quantity, not a price, and my 20 percent is a guess. The model does map one to the other: on this calibration the demand for seasonal farm labour has an elasticity of 0.21, so a 20 percent rise in its price is a 4.23 percent cut in the quantity of it. Read the other way, a 5 percent cut needs a 23.6 percent price rise, a 10 percent cut needs 47.3 percent, and a 20 percent cut needs 94.6 percent. The last of those is an extrapolation well outside the range where a log-linear model can be trusted.
 
 The model has one period, so there is no storage and no forward or futures market. Every stage buys the input and uses it in the same period. No stage holds any back for later, and no stage fixes a price in advance.
 
-That suits seasonal labour, which cannot be stored: a day of harvesting not done in August cannot be done in December. It suits other restricted inputs less well. A buyer who holds stock, or who bought forward before the restriction, can spread a temporary shortage over months, so the fall in employment would be smaller in any one quarter and longer in total. Williams and Wright set out how storage and futures prices work together, and downstream buyers do use both. For an input drawn from a finite stock, a restriction today also moves the price expected tomorrow, which is Hotelling's result from 1931. This matters most where I extend the argument: Section~\ref{sec:everywhere} raises $\lambda$ and calls the result oil, and oil is stored and traded forward.
+That suits seasonal labour, which cannot be stored: a day of harvesting not done in August cannot be done in December. It suits other restricted inputs less well. A buyer who holds stock, or who bought forward before the restriction, can spread a temporary shortage over months, so the fall in employment would be smaller in any one quarter and longer in total. Williams and Wright set out how storage and futures prices work together, and downstream buyers do use both. For an input drawn from a finite stock, a restriction today also moves the price expected tomorrow, which is Hotelling's result from 1931. Anyone carrying this model across to a stored and traded input, such as oil or a metal, would have to deal with that first.
 
 The household keeps its total spending fixed and changes only what it spends the money on. A household facing higher prices may save more and spend less in total, and output would then fall at every stage by more than the figures here. Here, these are jobs lost in one chain and not employment in the whole economy.
 
 \subsection{Reproducing the numbers}
 
-Every figure in this note is solved in code. The model is about a hundred lines of Python and needs numpy alone. A second script recomputes all 66 printed figures and checks each against the value in the text, and it reports a failure if any of them moves. Both are archived with this note at DOI \href{https://doi.org/10.5281/zenodo.22836881}{10.5281/zenodo.22836881}.
+Every figure in this note is solved in code. The model is about a hundred lines of Python and needs numpy alone. A second script recomputes all 61 printed figures and checks each against the value in the text, and it reports a failure if any of them moves. Both are archived with this note at DOI \href{https://doi.org/10.5281/zenodo.23019960}{10.5281/zenodo.23019960}.
 
 Four structural claims were also checked against a direct solution of the whole system over randomly drawn chains with $S$ from 1 to 6 and every parameter drawn at random: the matrix of Section~\ref{sec:solving} over 20,000 chains, agreeing to $2.0 \times 10^{-15}$; the recovery equations over 3,000, to $5.6 \times 10^{-16}$; the employment recursion over 20,000, to $3.3 \times 10^{-16}$; and the last-stage closed form over 5,000, to $1.7 \times 10^{-16}$.
 
@@ -706,23 +684,26 @@ Alfred Marshall set out indirect demand in 1890. ``The demand for raw materials 
 
 Production chains are longer now than the building trades he described, and policy restricts the first link more often: visas, tariffs, export licences, permits.
 
-Restrict the supply of an input at the top of a chain and it is possible that employment falls at every stage of it. It falls because output falls, and output falls by more than employment per unit of output rises.
+Restrict the supply of an input at the top of a chain and output falls at every stage of it. That much does not depend on any elasticity I have chosen. Employment is a different matter: it falls where output falls by more than employment per unit of output rises, and that is not everywhere.
 
-In percentage terms, employment falls most at the stage nearest the restriction. That stage can change its input mix least, and most of what it produces is bought by firms that are buying less. On these figures harvesting loses 2.21 percent of its employment and retail, two stages away, loses 0.32 percent, about seven times less.
+In percentage terms, employment falls most at the stage nearest the restriction. That stage can change its input mix least, and most of what it produces is bought by firms that are buying less. On these figures harvesting loses 1.23 percent of its employment and processing, one stage away, loses 0.06 percent.
 
-These are percentages of each stage's own employment. The model has no employment levels in it, so it does not say which stage loses the greater number of workers. A stage with a smaller percentage loss and many more workers can lose more of them: on these figures retail and food service would do so once it employs more than 6.79 times as many people as harvesting.
+The last stage is different in kind, not just in degree. No producing stage buys from it, so it carries only the fall in household demand, and against that it has its own switch away from the input that has become dearer. If it can switch faster than its customers switch away from it, it hires. Here it does, by 0.19 percent. That is I think a good description of how product-led businesses work; they keep their attention on both the consumer switching and technology feasibility and try to keep the product ahead of the market, or influence the market.
 
-The final stages can, in principle, grow. It depends on whether they can switch out of the restricted chain more than their customers switch away from them entirely. That is I think a good description of how product-led businesses work; they keep their attention on both the consumer switching and technology feasibility and try to keep the product ahead of the market, or influence the market.
+These are percentages of each stage's own employment. The model has no employment levels in it, so it does not say whether the chain gains or loses workers in total. If harvesting and processing employed the same number of people, the gain at retail and food service would offset the two losses once it employed about 6.7 times as many as either of them.
 
+How the cost is shared between pay and jobs is a separate question, settled by how elastically each stage's own inputs are supplied. With supply perfectly elastic the figures above hold and no nominal pay moves. With supply fixed nobody loses a job, harvesting pays 4.87 percent less for its own inputs, and the last stage's gain arrives as a 0.33 percent pay rise instead of extra hiring. Output falls either way.
 
-Making pay compensate for the cost of living can make things worse, by feeding the price rise back into costs. For food price rises, that is a small effect: the share of the original rise reaching the shelf rises from 12 percent to 13.8, and makes households buy 1.38 percent less rather than 1.20. For an input used throughout the economy the impact is serious, taking the same share to 58 percent and costing every stage over five percent of its employment. This is a reminder of how employment and pay are connected.
-
-In this case, the cap was set to protect American jobs and pay. Yet, it may be that employment falls at every stage of the chain, that the largest fall (in percentage terms) is at the stage where the cap applies, and that pay rises by less than selling prices everywhere. 
+In this case, the cap is proposed to protect American jobs and pay. Yet, it may be that output falls at every stage of the chain, that employment falls at the stages nearest the cap, and that the cost of living rises so that pay buys less everywhere.
 
 Governments cannot protect us from all costs and we need to engage more in the political economic debate beyond the clamour to do something. Voters should recognise the limits of governments and policy institutions and be careful what they ask for.  This may not just apply to restrictions on immigration. It may apply to a tariff on imported steel, a licence for rare earths, and so on.
 
 \section*{References}
 Acemoglu, D. (2010). ``When Does Labor Scarcity Encourage Innovation?'' \emph{Journal of Political Economy}, 118(6), 1037--1078.
+
+Atalay, E. (2017). ``How Important Are Sectoral Shocks?'' \emph{American Economic Journal: Macroeconomics}, 9(4), 254--280.
+
+Boehm, C. E., Flaaen, A., and Pandalai-Nayar, N. (2019). ``Input Linkages and the Transmission of Shocks: Firm-Level Evidence from the 2011 T\=ohoku Earthquake.'' \emph{Review of Economics and Statistics}, 101(1), 60--75.
 
 Bruno, M., and Sachs, J. D. (1985). \emph{Economics of Worldwide Stagflation}. Harvard University Press.
 
@@ -740,11 +721,21 @@ Kremer, M. (1993). ``The O-Ring Theory of Economic Development.'' \emph{Quarterl
 
 Marshall, A. (1890). \emph{Principles of Economics}. Macmillan. Book V, Chapter VI, ``Joint and Composite Demand. Joint and Composite Supply.''
 
+Muhammad, A., Seale, J. L., Meade, B., and Regmi, A. (2011). \emph{International Evidence on Food Consumption Patterns: An Update Using 2005 International Comparison Program Data}. USDA Economic Research Service, Technical Bulletin 1929.
+
 Rittel, H. W. J., and Webber, M. M. (1973). ``Dilemmas in a General Theory of
 Planning.'' \emph{Policy Sciences}, 4(2), 155--169.
 
 Williams, J. C., and Wright, B. D. (1991). \emph{Storage and Commodity Markets}. Cambridge University Press.
 
+US Congress (2026). \emph{U.S. Farmworker Protection Act}, H.R. 7541, 119th Congress, introduced 12 February 2026 by Rep. P. Jayapal with nine co-sponsors and referred to the Committee on the Judiciary. Text at \href{https://www.govinfo.gov/content/pkg/BILLS-119hr7541ih/html/BILLS-119hr7541ih.htm}{govinfo, BILLS-119hr7541ih}.
+
 US Department of Agriculture, Economic Research Service. \href{https://www.ers.usda.gov/data-products/charts-of-note/114074}{Food Dollar Series: farms received 11.8 cents per dollar spent on domestically produced food in 2024}.
+
+US Department of Agriculture, Economic Research Service. \href{https://www.ers.usda.gov/data-products/charts-of-note/78901}{Food Dollar Series, industry group shares: retail trade 12.9 cents and foodservices 32.7 cents}.
+
+US Department of Agriculture, Economic Research Service. \href{https://ers.usda.gov/data-products/charts-of-note/98569}{Labor costs on specialty crop farms: 39 percent of total cash expenses in 2018, against 13 percent for all US farms}.
+
+US Department of Homeland Security. \href{https://www.dhs.gov/h-2a-temporary-agricultural-worker-program}{H-2A Temporary Agricultural Worker Program}.
 
 \end{document}

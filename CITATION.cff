@@ -8,15 +8,16 @@ authors:
     orcid: "https://orcid.org/0009-0007-8976-6617"
 repository-code: "https://github.com/lavanito/supply-chain-model"
 license: MIT
-version: "1.0.0"
-date-released: "2026-09-22"
+version: "1.1.0"
+date-released: "2026-09-28"
 keywords:
   - production chains
   - input restrictions
   - employment
   - elasticity of substitution
-  - real wage resistance
+  - food dollar
   - immigration policy
+  - H-2A
   - H-2B
 preferred-citation:
   type: report
@@ -26,7 +27,7 @@ preferred-citation:
       given-names: Lavan
       orcid: "https://orcid.org/0009-0007-8976-6617"
   year: 2026
-  doi: 10.5281/zenodo.22836881
+  doi: 10.5281/zenodo.23019960
   publisher:
     name: Zenodo
-  notes: "Working note v1.0"
+  notes: "Working note v1.1. All versions: 10.5281/zenodo.22836880"

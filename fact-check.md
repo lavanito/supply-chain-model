@@ -1,5 +1,82 @@
 # Fact check: every claim in the note that did not come from the solver
 
+## VERSION 1.1 — 28 September 2026
+
+Version 1.1 recalibrated the note. Two errors in version 1.0 were found and fixed, and
+eleven external claims were added. The version 1.0 material below is left as written, so
+the record of what was checked and when stays intact. Where an item is superseded it
+says so here rather than being edited out of the older sections.
+
+### Two errors in version 1.0
+
+**A. The price elasticity of food demand was chosen, not measured.** Item 23 below was
+marked NOT VERIFIED: eta = 0.5 "matches measured food demand elasticities", with the
+note recording that it was plausible and conventional but unchecked. It does not match.
+The USDA Economic Research Service's compensated own-price elasticity of aggregate food
+demand for the United States is **0.24**. Version 1.1 uses that, and derives the
+household elasticity of substitution from it rather than the other way round. **Item 23
+is now closed.**
+
+The consequence is not cosmetic. The last producing stage gains employment whenever its
+own elasticity of substitution exceeds eta. At 0.45 against 0.5 it lost; at 0.45 against
+0.24 it gains. Version 1.0's headline claim that employment falls at every stage does not
+survive the correction.
+
+**B. The cost shares did not reproduce the food dollar they were matched to.** Version
+1.0 set theta = (0.40, 0.60, 0.50), whose product 0.120 was matched to the USDA farm
+share of 11.8 cents (item 20). But the product of all three shares is the share of the
+final dollar paid to the *restricted input*, not to farms. The farm gate is the product
+of the two downstream shares, which was 0.30 — two and a half times the measured 11.8
+cents. So version 1.0 gave seasonal labour alone the whole farm share, and gave farming
+two and a half times its own.
+
+Version 1.1 fixes both ends. theta_2 x theta_3 = 0.118, the measured farm share.
+theta_1 = 0.39, the measured labour share of farm cash costs. The product is 0.046, and
+the implied food dollar sums to 100 cents, which is now one of the checks in `verify.py`.
+
+### New external claims in version 1.1
+
+| # | Claim | Status | Source and note |
+|---|---|---|---|
+| 24 | H-2A carries no annual numerical limit | OK | [DHS, H-2A Temporary Agricultural Worker Program](https://www.dhs.gov/h-2a-temporary-agricultural-worker-program), verbatim: "There are no annual limitations on the number of temporary foreign H-2A workers that may be admitted into the United States." |
+| 25 | H.R. 7541, U.S. Farmworker Protection Act, introduced 12 February 2026 by Rep. Pramila Jayapal with nine co-sponsors, referred to House Judiciary | OK | [govinfo, BILLS-119hr7541ih](https://www.govinfo.gov/app/details/BILLS-119hr7541ih). Official title: "To protect United States workers by creating annual restrictions on the H–2A temporary worker program." **Note:** the UFW Foundation's release on the same bill calls it the Protect U.S. Workers Act of 2026 and dates it 13 February. The sponsor's own name and date are used |
+| 26 | The cap is on certified positions, not workers or visas | OK | Bill text, verbatim: "The Secretary of Labor may not certify petitions covering more than 400,000 positions for a fiscal year" |
+| 27 | Positions filled by a worker with a bargaining representative are exempt | OK | Bill text, verbatim: "Any position that the petitioner, in the petition, specifies will be filled by a worker who is represented by a bargaining representative shall not be counted towards the limit" |
+| 28 | Retail trade takes 12.9 cents and food service 32.7 cents of the food dollar | **OK, but check the vintage** | [USDA ERS food dollar industry groups](https://www.ers.usda.gov/data-products/charts-of-note/78901). These come from the 2014 industry-group series, while the 11.8-cent farm share is from 2024. **They are not a matched set.** The residual 42.6 cents is computed as what is left, so it absorbs the vintage mismatch |
+| 29 | Labour is 39 percent of total cash expenses on specialty crop farms, against 13 percent for all US farms, 2018 | OK | [USDA ERS](https://ers.usda.gov/data-products/charts-of-note/98569). The figure covers hired employees and contract labour |
+| 30 | Over 2006–10, labour was 48 percent of production costs for fruit, 35 for vegetables, 46 for nursery | OK | [USDA ERS](https://ers.usda.gov/data-products/charts-of-note/chart-detail?chartId=76856) |
+| 31 | eta = 0.24, the compensated own-price elasticity of US food demand | OK | Muhammad, Seale, Meade and Regmi, *International Evidence on Food Consumption Patterns*, ERS Technical Bulletin 1929, 2011. The report's own wording: the Slutsky own-price elasticity "begins at −0.23 for the Democratic Republic of Congo… and declines thereafter (absolutely) to −0.24 for the United States", on a food budget share of about 14 percent. **Estimated on 2005 ICP data.** The 2025 update (TB-1971, 2017 ICP) reports by income group only: −0.368 uncompensated for high-income economies. No current US-specific aggregate estimate was found |
+| 32 | Atalay estimates the elasticity between a stage's bought-in inputs and its own value added at 0.84 to 0.88 | OK | Atalay (2017), *AEJ: Macroeconomics*. IV estimates, standard errors 0.35 to 0.44; OLS 1.18 to 1.27; plant-level 0.4 to 0.8; the paper adopts 1.0 as its benchmark. **Not sector-specific** |
+| 33 | Boehm, Flaaen and Pandalai-Nayar find input use close to Leontief at short horizons | OK | *Review of Economics and Statistics* 101(1), 2019, 60–75, on the 2011 Tōhoku earthquake: "output falls roughly one-for-one with declines in imports, consistent with a relationship between imported and domestic inputs that is close to Leontief." **Note this is substitution between intermediate inputs, not between intermediates and value added, which is the parameter the note sets** |
+| 34 | Real US consumption has grown about 2.4 percent a year since 2000 | OK / DERIVED | BEA via FRED, PCECA deflated by DPCERG3A086NBEA. 2.38 percent a year 2000–2025; 2.85 percent 2019–2025. **Total, not per head** — population growth is in it. Used in the blog post, not in the note |
+
+### Checked but not used
+
+H-2A positions certified: **398,258 in FY2025** ([DOL OFLC, H-2A Selected Statistics
+FY2025 Q4](https://www.dol.gov/sites/dolgov/files/ETA/oflc/pdfs/H-2A_Selected_Statistics_FY2025_Q4.pdf)),
+against about 385,000 in FY2024 and just over 48,000 in FY2005 (USDA ERS). So the
+proposed 400,000 cap binds immediately. Neither the note nor the blog uses this yet; it
+would let the 20 percent shock be derived from the cap rather than guessed.
+
+### Items from version 1.0 now moot
+
+**Item 22, the energy weight.** Version 1.1 removes the section on an input used
+throughout the economy, and energy is no longer mentioned anywhere in the note except as
+one of the cost items inside the middle stage. The item no longer applies.
+
+**Item 19, Bruno and Sachs.** Still live and still **NOT VERIFIED**. The note still says
+they called this real wage resistance and used it to explain why the oil shocks led to
+much higher unemployment in some economies than in others. The book has not been read.
+In version 1.1 this sits in Section 3 and in Section 5.3, where the contrast is now
+between the two ends of the supply-elasticity range rather than between values of lambda.
+
+**Item 21, the food budget share.** Unchanged at 0.15 against a measured 0.137. The
+sensitivity table at the foot of this file was computed on the version 1.0 calibration
+and should not be read as current.
+
+---
+
+
 ## CORRECTIONS LOG — all applied to version 1.0
 
 Lavan held every correction until he had finished checking each item, then they were
