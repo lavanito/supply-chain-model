@@ -1,6 +1,6 @@
 {
   "name": "supply-chain-model",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Production-chain model of supply restrictions: JavaScript port of the Python solver, with tests reproducing the published figures.",
   "type": "module",
   "private": true,
