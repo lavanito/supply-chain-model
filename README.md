@@ -14,7 +14,7 @@ Lavan Mahadeva · ORCID [0009-0007-8976-6617](https://orcid.org/0009-0007-8976-6
 | **Paper, this version** | [doi.org/10.5281/zenodo.23019960](https://doi.org/10.5281/zenodo.23019960) |
 | **Paper, all versions** | [doi.org/10.5281/zenodo.22836880](https://doi.org/10.5281/zenodo.22836880) |
 | **Interactive version** | [supplyrestrictions.lavanito.com](https://supplyrestrictions.lavanito.com) |
-| **Blog post** | *link to the Substack post, to be added* |
+| **Blog post** | [Restrictions, cost rises and job losses in a chain](https://lavanmahadeva.substack.com/p/restrictions-cost-rises-and-job-losses) |
 
 ## What the paper argues
 
